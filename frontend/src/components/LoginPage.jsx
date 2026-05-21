@@ -1,8 +1,11 @@
 import { useState } from 'react'
 
+const API_URL = import.meta.env.VITE_API_URL || '/api'
+
 export default function LoginPage({ onLogin }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -11,7 +14,7 @@ export default function LoginPage({ onLogin }) {
     setError('')
     setLoading(true)
     try {
-      const res = await fetch('/api/auth/', {
+      const res = await fetch(`${API_URL}/auth/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -52,14 +55,24 @@ export default function LoginPage({ onLogin }) {
         />
 
         <label htmlFor="login-password">Senha</label>
-        <input
-          id="login-password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
-          required
-        />
+        <div className="password-wrapper">
+          <input
+            id="login-password"
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+            required
+          />
+          <button
+            type="button"
+            className="password-toggle"
+            onClick={() => setShowPassword((v) => !v)}
+            aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
+          >
+            {showPassword ? '🙈' : '👁️'}
+          </button>
+        </div>
 
         <button type="submit" className="btn-primary login-btn" disabled={loading}>
           {loading ? 'Entrando…' : 'Entrar'}
