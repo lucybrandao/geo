@@ -425,6 +425,106 @@ body {
 .error-banner button:focus-visible { outline: none; box-shadow: var(--focus-ring); }
 
 /* ==========================================================================
+   Botão de logout no header
+   ========================================================================== */
+.btn-logout {
+  margin-left: auto;
+  background: rgba(255,255,255,.15);
+  color: var(--color-neutral-00);
+  border: 1px solid rgba(255,255,255,.3);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.btn-logout:hover { background: rgba(255,255,255,.25); }
+.btn-logout:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+/* ==========================================================================
+   Tela de login
+   ========================================================================== */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-brand-lightest);
+  padding: var(--space-4);
+}
+
+.login-form {
+  background: var(--color-neutral-00);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  width: 22rem;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  box-shadow: var(--shadow-xl);
+}
+
+.login-logo {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: var(--space-1);
+}
+
+.login-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand);
+  text-align: center;
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-tight);
+}
+
+.login-form label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-80);
+}
+
+.login-form input {
+  border: 1px solid var(--color-neutral-40);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  min-height: 2.75rem;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  color: var(--color-neutral-100);
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s;
+  -webkit-appearance: none;
+}
+
+.login-form input:focus {
+  border-color: var(--color-brand);
+  box-shadow: var(--focus-ring);
+}
+
+.login-btn {
+  width: 100%;
+  min-height: 2.75rem;
+  margin-top: var(--space-2);
+}
+
+.login-error {
+  background: #FDF2F2;
+  color: var(--color-negative);
+  border: 1px solid #F5C6C4;
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+/* ==========================================================================
    Mobile
    ========================================================================== */
 @media (max-width: 40rem) {

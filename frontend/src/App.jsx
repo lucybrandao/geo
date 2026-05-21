@@ -2,20 +2,32 @@ import { useState, useEffect } from 'react'
 import MapView from './components/MapView'
 import Sidebar from './components/Sidebar'
 import AddPlaceForm from './components/AddPlaceForm'
+import LoginPage from './components/LoginPage'
 import { fetchPlaces, createPlace, deletePlace } from './api'
 import './App.css'
 
 export default function App() {
+  const [token, setToken] = useState(localStorage.getItem('token'))
   const [places, setPlaces] = useState([])
   const [pendingCoords, setPendingCoords] = useState(null)
   const [focusedPlace, setFocusedPlace] = useState(null)
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    if (!token) return
     fetchPlaces()
       .then(setPlaces)
       .catch(() => setError('Não foi possível carregar os lugares. Verifique se o backend está rodando.'))
-  }, [])
+  }, [token])
+
+  if (!token) {
+    return <LoginPage onLogin={setToken} />
+  }
+
+  function handleLogout() {
+    localStorage.removeItem('token')
+    setToken(null)
+  }
 
   function handleMapClick(latlng) {
     setPendingCoords({
@@ -48,6 +60,9 @@ export default function App() {
       <header className="app-header">
         <h1>Meu diário de viagens</h1>
         <span className="app-subtitle" aria-hidden="true">Clique no mapa para marcar um lugar visitado</span>
+        <button className="btn-logout" onClick={handleLogout} aria-label="Sair da conta">
+          Sair
+        </button>
       </header>
 
       {error && (
