@@ -1,4 +1,6 @@
-const BASE_URL = '/api'
+// Em dev usa o proxy do Vite (/api → localhost:8001)
+// Em produção usa a URL completa do Railway via VITE_API_URL
+const BASE_URL = import.meta.env.VITE_API_URL || '/api'
 
 export async function fetchPlaces() {
   const res = await fetch(`${BASE_URL}/places/`)
